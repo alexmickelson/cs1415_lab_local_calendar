@@ -27,20 +27,23 @@ public class CalendarWeek
     var output = new StringBuilder();
     output.Append(Environment.NewLine);
 
+    // first row
     output.Append("|");
     foreach (var day in Days)
     {
       if (day == null)
       {
-        output.Append("            |");
+        output.Append($" {new string(' ', CalendarMonth.DayWidth)} |");
       }
       else
       {
         var numberstring = day.Value.Day.ToString().PadLeft(2, '0');
-        output.Append($"         {numberstring} |");
+        output.Append($" {new string(' ', CalendarMonth.DayWidth - 2)}{numberstring} |");
       }
     }
     output.Append(Environment.NewLine);
+
+    // following rows
     for (int i = 0; i < CalendarMonth.DayHeight; i++)
     {
       output.Append("|");
@@ -48,7 +51,7 @@ public class CalendarWeek
       {
         if (day == null || !myEvents.ContainsKey(day.Value))
         {
-          output.Append("            |");
+          output.Append($" {new string(' ', CalendarMonth.DayWidth)} |");
         }
         else
         {
@@ -59,7 +62,7 @@ public class CalendarWeek
       output.Append(Environment.NewLine);
     }
 
-    output.Append("--------------------------------------------------------------------------------------------");
+    output.Append(new string('-', ((CalendarMonth.DayWidth + 3) * 7) + 1));
     return output.ToString();
   }
 
