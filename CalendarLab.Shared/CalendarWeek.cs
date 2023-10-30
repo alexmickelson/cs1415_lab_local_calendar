@@ -24,7 +24,43 @@ public class CalendarWeek
 
   public string GetFormattedString(Dictionary<DateTime, CalendarEvent> myEvents)
   {
-    return "";
+    var output = new StringBuilder();
+    output.Append(Environment.NewLine);
+
+    output.Append("|");
+    foreach (var day in Days)
+    {
+      if (day == null)
+      {
+        output.Append("            |");
+      }
+      else
+      {
+        var numberstring = day.Value.Day.ToString().PadLeft(2, '0');
+        output.Append($"         {numberstring} |");
+      }
+    }
+    output.Append(Environment.NewLine);
+    for (int i = 0; i < CalendarMonth.DayHeight; i++)
+    {
+      output.Append("|");
+      foreach (var day in Days)
+      {
+        if (day == null || !myEvents.ContainsKey(day.Value))
+        {
+          output.Append("            |");
+        }
+        else
+        {
+          var eventString = myEvents[day.Value].ToMultilineString()[i];
+          output.Append($" {eventString} |");
+        }
+      }
+      output.Append(Environment.NewLine);
+    }
+
+    output.Append("--------------------------------------------------------------------------------------------");
+    return output.ToString();
   }
-  
+
 }

@@ -11,4 +11,16 @@ public class CalendarMonth
   {
     Weeks = StaticCalendarUtils.GetWeeksInMonth(year, month);
   }
+
+  public override string ToString()
+  {
+    var builder = new StringBuilder("--------------------------------------------------------------------------------------------");
+
+    foreach (var week in Weeks)
+    {
+      builder.Append(week.GetFormattedString(CalendarEvents));
+    }
+
+    return builder.ToString();
+  }
 }
