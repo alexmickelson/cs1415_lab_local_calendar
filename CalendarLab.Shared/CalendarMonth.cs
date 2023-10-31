@@ -3,8 +3,8 @@ using System.Text;
 
 public class CalendarMonth
 {
-  public readonly static int DayWidth = 20;
-  public readonly static int DayHeight = 8;
+  public readonly static int DayWidth = 11;
+  public readonly static int DayHeight = 5;
   public Dictionary<DateTime, CalendarEvent> CalendarEvents { get; } = new();
   public List<CalendarWeek> Weeks { get; }
   public CalendarMonth(int year, int month)
